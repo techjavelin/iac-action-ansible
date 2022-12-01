@@ -114,6 +114,14 @@ async function main() {
             process.env.ANSIBLE_FORCE_COLOR = "True"
         }
 
+        if (checkMode) {
+            cmd.push("--check")
+        }
+
+        if (diff) {
+            cmd.push("--diff")
+        }
+
         let output = ""
         await exec.exec(cmd.join(' '), null, {
           listeners: {

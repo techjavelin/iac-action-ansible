@@ -7,21 +7,53 @@ branding:
   color: green
 
 inputs:
-  name:
-    description: "The name"
+  playbook:
+    description: Ansible playbook filepath
     required: true
-
+  requirements:
+    description: Ansible Galaxy requirements filepath
+    required: false
+  directory:
+    description: Root directory of Ansible project (defaults to current)
+    required: false
+  key:
+    description: SSH private key used to connect to the host
+    required: false
+  inventory:
+    description: Custom content to write into hosts
+    required: false
+  vault_password:
+    description: The password used for decrypting vaulted files
+    required: false
+  known_hosts:
+    description: Contents of SSH known_hosts file
+    required: false
+  options:
+    description: Extra options that should be passed to ansible-playbook command
+    required: false
+  sudo:
+    description: Set to "true" if root is required for running your playbook
+    required: false
+  no_color:
+    description: Set to "true" if the Ansible output should not include colors (defaults to "false")
+    required: false
+  use_pipenv:
+    description: Set to true if ansible should run inside of pipenv
+    required: false
+  check_mode: 
+    description: Set to true if ansible should run with --check
+    required: false
+  diff:
+    description: Set to true if you'd like ansible to output a diff rather than plaintext for check mode
+    required: false
 outputs:
-  msg:
-    description: "The message"
-    value: ${{ steps.message.outputs.message }}
-
+  output:
+    description: The captured output of both stdout and stderr from the Ansible Playbook run
+  pipenv:
+    description: The captured output of pipenv install
+  pipenv_error:
+    description: The captured stderr output of pipenv install
 runs:
-  using: composite
-  steps:
-    - run: echo "Hello ${{ inputs.name }}"
-      shell: bash
-
-    - id: message
-      run: echo "message=Hello ${{ inputs.name }}" >> $GITHUB_OUTPUT
-      shell: bash
+  using: node16
+  main: main.js
+  post: post.js
