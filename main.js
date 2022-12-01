@@ -28,8 +28,8 @@ async function main() {
         if (pipenv) {
             await exec.exec("pip install --user pipenv")
 
+            let pipenv_output = "", pipenv_error = ""
             try {
-                let pipenv_output = "", pipenv_error = ""
                 await exec.exec("pipenv install", null, {
                 listeners: {
                     stdout: function(data) {
