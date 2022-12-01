@@ -17,15 +17,17 @@ async function main() {
         const vaultPassword = core.getInput("vault_password")
         const knownHosts = core.getInput("known_hosts")
         const options = core.getInput("options")
-        const sudo    = core.getInput("sudo")
-        const noColor = core.getInput("no_color")
-        const checkMode = core.getIgetBooleanInputnput("check_mode")
+        const sudo    = core.getBooleanInput("sudo")
+        const noColor = core.getBooleanInput("no_color")
+        const checkMode = core.getBooleanInput("check_mode")
         const diff = core.getBooleanInput("diff")
         const pipenv = core.getBooleanInput("use_pipenv")
 
         let cmd = ["ansible-playbook", playbook]
 
         if (pipenv) {
+            await exec.exec("pip install --user pipenv")
+
             try {
                 let pipenv_output = "", pipenv_error = ""
                 await exec.exec("pipenv install", null, {
