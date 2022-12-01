@@ -1,0 +1,28 @@
+---
+name: "Continuous Integration | main"
+
+on:
+  push:
+    branches:
+      - main
+    pull_request:
+
+jobs:
+  composite-action-lint:
+    name: iac-action-terraform-validate // continuous // composite-action-lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: composite-action-lint // checkout
+        uses: actions/checkout@v3
+
+      - name: composite-action-lint // install-action-validator
+        run: |
+          gh release download --pattern "*_linux_amd64" -R mpalmer/action-validator --skip-existing
+          chmod +x ./action-validator_linux_amd64
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: composite-action-lint // execute
+        run: ./action-validator_linux_amd64 -v action.yml
+

@@ -1,0 +1,27 @@
+---
+name: 'techjavelin/iac-github-actions // template'
+description: 'Describe what this action does'
+
+branding:
+  icon: edit
+  color: green
+
+inputs:
+  name:
+    description: "The name"
+    required: true
+
+outputs:
+  msg:
+    description: "The message"
+    value: ${{ steps.message.outputs.message }}
+
+runs:
+  using: composite
+  steps:
+    - run: echo "Hello ${{ inputs.name }}"
+      shell: bash
+
+    - id: message
+      run: echo "message=Hello ${{ inputs.name }}" >> $GITHUB_OUTPUT
+      shell: bash
