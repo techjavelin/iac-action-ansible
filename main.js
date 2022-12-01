@@ -26,7 +26,7 @@ async function main() {
         let cmd = ["ansible-playbook", playbook]
 
         if (pipenv) {
-            await exec.exec("pip install --user pipenv")
+            await exec.exec("pip install pipenv")
 
             let pipenv_output = "", pipenv_error = ""
             try {
