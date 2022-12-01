@@ -17,11 +17,11 @@ async function main() {
         const vaultPassword = core.getInput("vault_password")
         const knownHosts = core.getInput("known_hosts")
         const options = core.getInput("options")
-        const sudo    = core.getBooleanInput("sudo")
-        const noColor = core.getBooleanInput("no_color")
-        const checkMode = core.getBooleanInput("check_mode")
-        const diff = core.getBooleanInput("diff")
-        const pipenv = core.getBooleanInput("use_pipenv")
+        const sudo    = core.getInput("sudo")
+        const noColor = core.getInput("no_color")
+        const checkMode = core.getInput("check_mode")
+        const diff = core.getInput("diff")
+        const pipenv = core.getInput("use_pipenv")
 
         let cmd = ["ansible-playbook", playbook]
 
