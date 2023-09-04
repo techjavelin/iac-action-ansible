@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: composite-action-lint // checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: composite-action-lint // install-action-validator
         run: |
